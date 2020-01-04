@@ -1,0 +1,58 @@
+<html>
+        <head>
+            <title>Check Pin Form</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" href="style.css">
+    
+        </head>
+        <body>
+            <br>
+            <br>
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+    
+                    </div>
+                    <div class="col-md-6 main">
+                        <form action="../backend/check.php" method="post">
+                            <h1>Pin Check</h1>
+                            <br>
+                            <input class="box" type="text" name="pin" id="pin" placeholder="Enter your Unique Pin" required /><br>
+                            <br>
+                            <input type="submit" id="chkDetails" name="chkDetails" value="Check" /><br>
+                        
+                        </form>
+                    </div>
+                    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+                    
+                 <script type="text/javascript"> 
+                     $(function(){ 
+                       $("#chkDetails").on('click', function(){ 
+                       $.ajax({ 
+                         method: "GET", 
+                        
+                         url: "../backend/check.php",
+                       }).done(function( data ) { 
+                         var result= $.parseJSON(data); 
+                         var string='<table width="100%"><tr> <th>#</th><th>Name</th> <th>Email</th><tr>';
+                       
+                         $.each( result, function( key, value ) { 
+                           
+                           string += "<tr> <td>"+value['id'] + "</td><td>"+value['first_name']+' '+value['last_name']+'</td>  \
+                                     <td>'+value['email']+"</td> </tr>"; 
+                               }); 
+                              string += '</table>'; 
+                           $("#records").html(string); 
+                        }); 
+                     }); 
+                 }); 
+                 </script> 
+                    <div class="col-md-3">
+                        
+                    </div>
+    
+                </div>
+            </div>
+        </body>
+    </html>
